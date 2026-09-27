@@ -157,6 +157,35 @@ xychart-beta
 
 *Proof of concept — tested on one project so far. The manual figure is an estimate, not a timed measurement.*
 
+## Advantages, disadvantages and impact
+
+### Advantages
+- **Personalised per hire, not one generic tour.** Role, experience level, start date, buddy and starter tasks are specific to the named person. Comparable tools such as LACY generate one tour per repo and reuse it for everyone.
+- **Grounded, not self-graded.** Plain Python, not the model, confirms that every cited `file:line` exists before anything ships. Anything unconfirmed becomes "Unknown, ask your buddy".
+- **A human always signs off, cheaply.** Review is narrowed to a short flagged list (3–6 bullets), not the whole pack. This follows the research: curated material scored 83% vs 57% for AI-only (LACY).
+- **Fresh per hire, not stale once.** The pack is regenerated from the live repo for every hire, so it doesn't rot like a wiki page.
+- **Portable, works before day one.** A PDF and email need no tool install. The context folder upgrades the newcomer's own Bob into an assistant that already knows the codebase.
+- **Questions go somewhere real.** The email's reply-to is the newcomer's buddy, so there's no new Q&A system to maintain.
+- **Generic core.** A new company is a folder in `instances/`, not a code change.
+
+### Disadvantages and limits
+- **Tested on one project so far.** Not yet validated on a second, larger codebase or with a real cohort of new hires.
+- **The time saving is an estimate.** The 4–8 h manual baseline is built from proxies, not a timed measurement.
+- **The Malaysia case is inferred.** It chains international and regional numbers; there is no local study of developer onboarding.
+- **Supporting studies are small.** LACY (a small deployment at Beko; 2 experts surveyed) and TARS (n=18) are early evidence; the headline claim leans on Xia et al. (79 devs, 3,244 h).
+- **No live Q&A.** Follow-up questions go to the buddy by email, not to an interactive assistant (a deliberate scope cut).
+- **Tied to IBM Bob IDE, run interactively.** Headless/CI execution (`bob run`) is unconfirmed, so a person has to start each run.
+- **Video is the least-proven channel.** It needs extra tools (Piper TTS + ffmpeg, ~63 MB), and the evidence for its value is weaker than for the PDF and context folder.
+
+### Impact
+| Who | Impact | Basis |
+|---|---|---|
+| Senior / manager | Active time per hire drops from an estimated **4–8 h** to **~1 min** of approval (≈ RM220–680 → ~RM1–1.50) | Estimate, [`06-time-cost-comparison.md`](bob-onboarding-poc/Research/synthesis/06-time-cost-comparison.md) |
+| New hire | Gets a code tour, first tasks and a dated timeline before day one, aimed at the comprehension work that takes ~58% of dev time | Xia et al. 2018; demo output |
+| Codebase / security | Real problems surface before day one: **10 issues** in the demo, including **3 hardcoded credential leaks** | Demo run on CTMS_Project |
+| Team | Every hire gets the same checked process instead of whoever is free that week | Pipeline design |
+| Malaysian employers | With 63% of tech staff planning to move within 12 months and 17.4% turnover, onboarding repeats more often, so the per-hire saving compounds | Hays 2025, Aon 2026 (inferred, not measured) |
+
 ## Where we are today
 
 **Status (27 Sep 2026):** v2 built and run end to end in Bob. PDF, tour video and context zip were delivered by the Bob-built MCP server to an Ethereal test inbox.
