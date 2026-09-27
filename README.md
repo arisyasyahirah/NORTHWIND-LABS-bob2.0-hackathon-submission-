@@ -15,31 +15,38 @@ This costs real hours per hire, and there's no repeatable, testable process behi
 
 ## The solution
 
-hires/alex-tan.yaml
-        │
-        ▼
-/onboard (Bob skill: onboarding-pipeline)
-        │
-Stage 0: Intake        → confirm codebase, company, hire details
-Stage 1: Generate      → 4 parallel subagents
-        │
-        ├── company & role subagent
-        ├── architecture & code tour subagent
-        ├── issue scan subagent
-        └── tech stack subagent
-        │
-Stage 2: Merge         → pack.md, manager.md, storyboard.json
-Stage 3: Check         → verify every citation exists on disk
-Stage 4: Human approval gate (hard stop)
-Stage 5: Render        → PDF + narrated video
-Stage 6: Package       → context.zip for the newcomer's own Bob
-Stage 7: Send          → onboarding-mail MCP server (Bob-built)
-        │
-        ▼
-onboarding/<hire>.pdf · <hire>-tour.mp4 · context/ · flagged.md
+**`hires/alex-tan.yaml`** → **`/onboard`** (Bob skill: `onboarding-pipeline`)
 
-*Each subagent reads the real repo and writes its section with file:line evidence — not opinions.*
+**Stage 0 — Intake**
+Confirm codebase, company, and hire details.
 
+**Stage 1 — Generate** (4 parallel subagents, each grounded in the real repo)
+- Company & role subagent
+- Architecture & code tour subagent
+- Issue scan subagent
+- Tech stack subagent
+
+> Each subagent reads the real repo and writes its section with file:line evidence — not opinions.
+
+**Stage 2 — Merge**
+Combines subagent output into `pack.md`, `manager.md`, `storyboard.json`.
+
+**Stage 3 — Check**
+Verifies every citation exists on disk.
+
+**Stage 4 — Human approval gate** (hard stop)
+Nothing proceeds without explicit sign-off.
+
+**Stage 5 — Render**
+Produces the PDF and narrated video.
+
+**Stage 6 — Package**
+Builds `context.zip` for the newcomer's own Bob.
+
+**Stage 7 — Send**
+Delivers via the onboarding-mail MCP server (Bob-built).
+
+**Output:** `onboarding/<hire>.pdf` · `<hire>-tour.mp4` · `context/` · `flagged.md`
 ## Bob features used
 
 | Bob feature | How this project uses it |
