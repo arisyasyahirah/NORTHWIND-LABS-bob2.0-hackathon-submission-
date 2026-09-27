@@ -15,25 +15,28 @@ This costs real hours per hire, and there's no repeatable, testable process behi
 
 ## The solution
 
-hires/alex-tan.yaml ──► 🧭 /onboard (Bob skill: onboarding-pipeline)
-                           │ Stage 0  Intake  → confirm codebase, company, hire details
-                           │ Stage 1  Generate → 4 parallel subagents
-                           ▼
-   ┌────────────┬────────────┬────────────┬────────────┐
-   │ company &  │ architect. │ issue      │ tech stack │   each subagent reads the
-   │ role       │ & code     │ scan       │            │   real repo and writes its
-   │ subagent   │ tour       │ subagent   │ subagent   │   section with file:line
-   └─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┘   evidence, not opinions
-         ▼            ▼            ▼            ▼
-                           │ Stage 2  Merge  → pack.md, manager.md, storyboard.json
-                           │ Stage 3  Check  → verify every citation exists on disk
-                           │ Stage 4  Human approval gate (hard stop)
-                           │ Stage 5  Render → PDF + narrated video
-                           │ Stage 6  Package → context.zip for the newcomer's own Bob
-                           │ Stage 7  Send   → onboarding-mail MCP server (Bob-built)
-                           ▼
-        onboarding/<hire>.pdf · <hire>-tour.mp4 · context/ · flagged.md
+```mermaid
+flowchart TD
+    A["hires/alex-tan.yaml"] --> B["/onboard (Bob skill: onboarding-pipeline)"]
+    B --> C["Stage 0 — Intake<br/>confirm codebase, company, hire details"]
+    C --> D["Stage 1 — Generate<br/>4 parallel subagents"]
+    D --> E1["Company & Role<br/>subagent"]
+    D --> E2["Architecture & Code Tour<br/>subagent"]
+    D --> E3["Issue Scan<br/>subagent"]
+    D --> E4["Tech Stack<br/>subagent"]
+    E1 --> F["Stage 2 — Merge<br/>pack.md, manager.md, storyboard.json"]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+    F --> G["Stage 3 — Check<br/>verify every citation exists on disk"]
+    G --> H["Stage 4 — Human approval gate (hard stop)"]
+    H --> I["Stage 5 — Render<br/>PDF + narrated video"]
+    I --> J["Stage 6 — Package<br/>context.zip for the newcomer's own Bob"]
+    J --> K["Stage 7 — Send<br/>onboarding-mail MCP server (Bob-built)"]
+    K --> L["Output: onboarding/&lt;hire&gt;.pdf · &lt;hire&gt;-tour.mp4 · context/ · flagged.md"]
+```
 
+*Each subagent reads the real repo and writes its section with file:line evidence — not opinions.*
 
 ## Bob features used
 
@@ -82,7 +85,7 @@ All 10 issues are reported with `file:line` evidence and guidance — not a patc
 
 | | Manual | Bob Onboarding Pipeline |
 |---|---|---|
-| Prepare onboarding material for one hire | **~20 minutes** machine time + ~1 minute human approval |
+| Prepare onboarding material for one hire | an estimated **[X] hours** | **~20 minutes** machine time + ~1 minute human approval |
 | Consistency across hires | depends who's free that week | same deterministic process every time |
 | Grounded in real code | only if the senior double-checks | every claim verified against `file:line` |
 | Issues surfaced before day one | usually none | 10 found automatically, including 3 credential leaks |
@@ -92,7 +95,6 @@ All 10 issues are reported with `file:line` evidence and guidance — not a patc
 ## Run it
 
 Requirements: IBM Bob IDE, this folder open as the workspace, a `.env` with SMTP credentials (see `.env.example`).
-
 
 cd bob-onboarding-workspace
 py -3 scripts/selftest.py          # confirm the toolchain is clean
