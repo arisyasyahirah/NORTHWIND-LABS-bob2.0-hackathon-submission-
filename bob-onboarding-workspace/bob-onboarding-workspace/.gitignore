@@ -1,0 +1,6 @@
+.env
+onboarding/
+__pycache__/
+.bob/mcp.json
+.venv/
+scripts/voices/

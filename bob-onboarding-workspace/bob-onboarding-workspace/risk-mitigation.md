@@ -1,0 +1,17 @@
+# Risk triage — fix now, or leave it
+
+For each disadvantage flagged earlier: fixed with a concrete, cheap, real-world-precedented change (and where), or deliberately left as an acknowledged limitation, with why chasing it further isn't worth the time.
+
+| Risk | Decision | What we actually did / will say |
+|---|---|---|
+| **Tension with "less human involvement"** | **Fix — narrow the review, not the gate** | The manager now reads a short **"Flagged for review"** list (3–6 bullets: unresolved rationale, removed citations, low-confidence items) instead of the whole pack. Same precedent as code review tools surfacing only the diff. Added to `SKILL.md` (new step) and the manager template. ~2 minutes, not a re-read. |
+| **Static PDF, no live tool** | **Leave — already structurally mitigated** | Unlike LACY (one tour, published once, reused for months → goes stale), we regenerate a fresh pack **per hire**. Staleness barely accrues. No new build needed — just say this in the pitch if asked. |
+| **No Q&A / notes loop** | **Fix — route to an existing channel, don't build one** | Set `reply_to` = the buddy's email on the delivery email. Questions land in a real inbox with zero new infrastructure. Added `reply_to` param to the MCP tool spec in `BOB_PROMPTS.md`. |
+| **Malaysia case is inferred, not measured** | **Leave — no fix achievable in the time left** | A real local onboarding study is out of scope for a 48-hour build. Keep the technical justification anchored on the directly-measured international mechanism (Xia et al., 58%), and present the Malaysia numbers explicitly as *motivation*, not *proof* — already how the statements are framed. Don't overclaim if a judge pushes on it; say so plainly. |
+| **Thin sample sizes on borrowed research** (LACY n=5/2, TARS n=18, modelling study n=31) | **Leave — inherent to the literature's current state** | Can't fix with engineering. Mitigate with honest language ("early evidence," "a real deployment, not a lab study") and lean hardest on the one peer-reviewed, large-sample result (Xia et al.) for the headline claim. |
+| **Nothing built yet / execution risk** | **Fix — explicit build order + fallback** | Added a numbered build order to `BOB_PROMPTS.md`: core skill + pack (highest judging weight) → approval gate → PDF → email. Cutting stops at step 4 if the clock runs out; step 1–2 never gets cut to make room for 3–4. Standard MVP/walking-skeleton practice — ship the thinnest full vertical slice first. |
+| **Extra build surface: PDF renderer + MCP email server** | **Fix — de-risk with a dry-run mode + a disposable test inbox** | The email server gets a `--dry-run` flag: log what would be sent instead of requiring live SMTP to work during the recorded demo. Real send, when built, uses a burner inbox (Mailtrap/Ethereal) — already planned, which also removes the "leaked real credentials" risk entirely, since there's no real mailbox to leak. |
+| **Headless `bob run` unconfirmed** | **Leave — don't depend on it** | Primary path stays interactive-in-IDE (already the plan). Headless mode is mentioned in the pitch as "if the account supports it," never as something the demo depends on. |
+
+## Net effect
+Three cheap, concrete fixes went in (`Flagged for review`, `reply_to`, `--dry-run`) — none of them add a new subsystem, they narrow or de-risk existing ones. Four items are left as acknowledged, honestly-stated limitations because fixing them would cost more than the time available, or isn't an engineering problem at all.

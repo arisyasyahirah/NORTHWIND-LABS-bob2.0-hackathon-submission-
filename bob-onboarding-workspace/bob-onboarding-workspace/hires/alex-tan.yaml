@@ -1,0 +1,8 @@
+# Fictional new hire — do not use real personal data (hackathon rule).
+name: Alex Tan
+email: alex.tan@example.com
+role: backend-engineer        # matches roles/<role>.md
+manager: Priya Menon
+buddy: Daniel Wong            # required — buddies measurably speed up ramp-up
+start_date: 2026-10-05
+experience: junior            # junior | mid | senior — sets explanation depth

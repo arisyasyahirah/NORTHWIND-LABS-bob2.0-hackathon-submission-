@@ -1,0 +1,14 @@
+build/
+dist/
+nbproject/private/
+*.class
+<<<<<<< HEAD
+*.jar
+*.war
+=======
+*.war
+>>>>>>> 1f59aeaef078935006ca9aabf9927e4b48ab3b13
+!/CTMS_Project/web/WEB-INF/lib/jstl-1.2.jar
+!/CTMS_Project/web/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-3.0.2.jar
+!/CTMS_Project/web/WEB-INF/lib/jakarta.servlet.jsp.jstl-3.0.1.jar
+!/CTMS_Project/web/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-3.0.0.jar
