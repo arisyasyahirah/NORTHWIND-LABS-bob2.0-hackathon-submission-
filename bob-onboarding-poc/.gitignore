@@ -1,0 +1,4 @@
+.env
+/onboarding/
+__pycache__/
+*.pyc

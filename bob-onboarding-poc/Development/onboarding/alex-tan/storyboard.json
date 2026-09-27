@@ -1,0 +1,104 @@
+{
+  "title": "Welcome to Northwind Labs, Alex",
+  "scenes": [
+    {
+      "kind": "cover",
+      "meta": ["Role: Backend Engineer · Level: Junior · Manager: Priya Menon · Buddy: Daniel Wong"],
+      "say": "Welcome to Northwind Labs, Alex. A quick tour of the Cinema Ticket Management System."
+    },
+    {
+      "kind": "points",
+      "title": "Why we exist",
+      "points": [
+        "Northwind Labs: logistics simple enough for a two-person team",
+        "Your project: CTMS — movies, showtimes, bookings, payments",
+        "Values: ship small, quality is everyone's job, write it down"
+      ],
+      "say": [
+        "Founded to prove that a field-service operation does not need enterprise software. Simplicity is the product.",
+        "You are joining mid-product: auth, movie catalogue, showtimes, seat booking, and a Stripe webhook are already live.",
+        "Three values in practice: merge small PRs, broken tests block everyone, and decisions get a comment in the code."
+      ]
+    },
+    {
+      "kind": "points",
+      "title": "What you own",
+      "points": [
+        "Platform team — API and data layer",
+        "18 Servlets mapped to URLs in the controller package",
+        "Services between controller and database; SQL only in DAO"
+      ],
+      "say": [
+        "As the backend engineer on Platform, you are the last line of defence before the database. Own that boundary.",
+        "Each Servlet handles one URL. The mapping is in web dot xml. If a page breaks, start with the Servlet for that path.",
+        "Keep SQL out of Servlets and services — it belongs only in the DAO layer, so queries are easy to find and test."
+      ]
+    },
+    {
+      "kind": "points",
+      "title": "Before you touch anything",
+      "points": [
+        "ISSUE-001: DB credentials hardcoded in source — rotate day one",
+        "ISSUE-003: Passwords plain text, no hashing — critical",
+        "ISSUE-004: SQL typo at CustomerDAO line 105 — your first fix"
+      ],
+      "say": [
+        "Anyone with read access to the repo can connect to the database right now. Rotating the credentials is not optional.",
+        "Storing passwords without hashing means a single database dump exposes every user account. Treat this as a live incident.",
+        "A one-character SQL keyword is misspelled at line one-oh-five. The test you write alongside the fix will be your template for every DAO test after this."
+      ]
+    },
+    {
+      "kind": "flow",
+      "kicker": "Code tour · 1 of 3",
+      "title": "The login request",
+      "nodes": [
+        "Browser|client",
+        "LoginServlet|controller",
+        "AccountService|service",
+        "CustomerDAO|dao"
+      ],
+      "active": 1,
+      "point": "Login posts to LoginServlet:19, which calls AccountService to check credentials",
+      "refs": [
+        "src/java/com/ctms/controller/LoginServlet.java:19",
+        "src/java/com/ctms/service/AccountService.java:32"
+      ],
+      "say": "A login form posts to LoginServlet. Line nineteen reads the username and password, then calls AccountService. At line thirty-two in AccountService, the password is compared with dot-equals — no hashing. That is ISSUE-003."
+    },
+    {
+      "kind": "flow",
+      "kicker": "Code tour · 2 of 3",
+      "title": "After login: redirect and filter",
+      "nodes": [
+        "LoginServlet|controller",
+        "AuthFilter|filter",
+        "Protected servlet|controller"
+      ],
+      "active": 0,
+      "point": "LoginServlet:63 redirects by role; AuthFilter:18 guards every protected page",
+      "refs": [
+        "src/java/com/ctms/controller/LoginServlet.java:63",
+        "src/java/com/ctms/filter/AuthFilter.java:18"
+      ],
+      "say": "After a successful login, line sixty-three in LoginServlet redirects by role: three is HQ, two is manager, one is staff. Every subsequent request passes through AuthFilter at line eighteen, which checks the session before allowing access."
+    },
+    {
+      "kind": "flow",
+      "kicker": "Code tour · 3 of 3",
+      "title": "Database connection",
+      "nodes": [
+        "Any DAO|dao",
+        "ConnectionDB|util",
+        "PostgreSQL|database"
+      ],
+      "active": 1,
+      "point": "All DAOs get a connection from ConnectionDB:6, where credentials are hardcoded",
+      "refs": [
+        "src/java/com/ctms/util/ConnectionDB.java:6",
+        "src/java/com/ctms/util/ConnectionDB.java:8"
+      ],
+      "say": "Every DAO calls ConnectionDB to get a database connection. Lines six and eight contain the hardcoded hostname and password — that is ISSUE-001. Rotating these credentials on day one is your first priority."
+    }
+  ]
+}

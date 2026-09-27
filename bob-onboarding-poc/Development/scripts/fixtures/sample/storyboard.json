@@ -1,0 +1,75 @@
+{
+  "title": "Welcome to Northwind Labs, Alex Tan",
+  "scenes": [
+    {
+      "kind": "cover",
+      "meta": [
+        "Role: Backend Engineer · Level: junior · Manager: Priya Menon · Buddy: Daniel Wong"
+      ],
+      "say": "Welcome to Northwind Labs, Alex Tan. Let's read your first piece of real code."
+    },
+    {
+      "kind": "points",
+      "title": "What you own",
+      "points": [
+        "The backend and API service",
+        "Database seed data and migrations",
+        "Reviews within one working day"
+      ],
+      "say": [
+        "That means you are the last engineer before the database. If a query is slow or wrong, it is yours to fix.",
+        "Migrations are version-controlled. Run them in order and never edit a committed migration in place.",
+        "One working day keeps the team unblocked. If you need more time, say so early — a comment beats a silent delay."
+      ]
+    },
+    {
+      "kind": "flow",
+      "kicker": "Code tour · 1 of 3",
+      "title": "Where it all begins",
+      "nodes": [
+        "main()|entry",
+        "get_user()|query",
+        "SQLite|app.db"
+      ],
+      "active": 0,
+      "point": "Requests enter through main() at the top of the file",
+      "refs": [
+        "app/main.py:1"
+      ],
+      "say": "Every request begins at the top of the file, where main is defined. Imports and the database path live here."
+    },
+    {
+      "kind": "flow",
+      "kicker": "Code tour · 2 of 3",
+      "title": "Where it starts at runtime",
+      "nodes": [
+        "main()|entry",
+        "get_user()|query",
+        "SQLite|app.db"
+      ],
+      "active": 0,
+      "point": "One request flows from main() to get_user() and back",
+      "refs": [
+        "app/main.py:11"
+      ],
+      "say": "Everything starts in main, on line eleven. One request flows from main to get user, and back."
+    },
+    {
+      "kind": "flow",
+      "kicker": "Code tour · 3 of 3",
+      "title": "The whole file, two views",
+      "nodes": [
+        "main()|entry",
+        "get_user()|query",
+        "SQLite|app.db"
+      ],
+      "active": 1,
+      "point": "Two places to know: the top of the file and the entry point",
+      "refs": [
+        "app/main.py:11",
+        "app/main.py:1"
+      ],
+      "say": "Keep two places in mind: the entry point, and the top of the file where the imports live."
+    }
+  ]
+}

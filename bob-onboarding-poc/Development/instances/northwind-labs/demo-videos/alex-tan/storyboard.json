@@ -1,0 +1,200 @@
+{
+  "title": "Welcome to Northwind Labs, Alex",
+  "scenes": [
+    {
+      "kind": "cover",
+      "meta": [
+        "Role: Backend Engineer · Level: Junior · Manager: Priya Menon · Buddy: Daniel Wong"
+      ],
+      "say": "Welcome to Northwind Labs, Alex. Here is your first day in one story: the codebase you own, and how a single login moves through it."
+    },
+    {
+      "kind": "points",
+      "title": "Why we exist",
+      "points": [
+        "Field-service logistics, made simple",
+        "Small enough to run from a phone",
+        "When in doubt, choose the simpler option"
+      ],
+      "say": [
+        "We make field-service logistics simple.",
+        "Simple enough that a two-person team can run it from a phone.",
+        "So when in doubt, choose the simpler option."
+      ]
+    },
+    {
+      "kind": "points",
+      "title": "What you own",
+      "points": [
+        "The API and data layer of CTMS",
+        "Controllers, services, DAOs, models",
+        "Tests for whatever you ship",
+        "Code review within one working day"
+      ],
+      "say": [
+        "You own the API and data layer of CTMS, a cinema ticketing app.",
+        "That means controllers, services, D A O queries and models.",
+        "Plus the tests for whatever you ship.",
+        "And you review teammates' pull requests within one working day."
+      ]
+    },
+    {
+      "kind": "flow",
+      "kicker": "The login story · 1 of 6",
+      "title": "The request arrives",
+      "nodes": [
+        "Browser|user",
+        "LoginServlet|controller",
+        "AccountService|service",
+        "CustomerDAO|dao",
+        "ConnectionDB|util",
+        "PostgreSQL|supabase"
+      ],
+      "active": 1,
+      "point": "doPost() reads the email and password",
+      "refs": [
+        "src/java/com/ctms/controller/LoginServlet.java:23"
+      ],
+      "say": "A customer submits the login form. It lands in LoginServlet, where doPost reads the email and password."
+    },
+    {
+      "kind": "flow",
+      "kicker": "The login story · 2 of 6",
+      "title": "The servlet hands off",
+      "nodes": [
+        "Browser|user",
+        "LoginServlet|controller",
+        "AccountService|service",
+        "CustomerDAO|dao",
+        "ConnectionDB|util",
+        "PostgreSQL|supabase"
+      ],
+      "active": 2,
+      "point": "Business logic lives in the service, not the servlet",
+      "refs": [
+        "src/java/com/ctms/service/AccountService.java:32"
+      ],
+      "say": "The servlet hands off to AccountService, which checks both the employee and customer records. Business logic lives here."
+    },
+    {
+      "kind": "flow",
+      "kicker": "The login story · 3 of 6",
+      "title": "One prepared query",
+      "nodes": [
+        "Browser|user",
+        "LoginServlet|controller",
+        "AccountService|service",
+        "CustomerDAO|dao",
+        "ConnectionDB|util",
+        "PostgreSQL|supabase"
+      ],
+      "active": 3,
+      "point": "Prepared statements prevent SQL injection",
+      "refs": [
+        "src/java/com/ctms/dao/CustomerDAO.java:22",
+        "src/java/com/ctms/dao/CustomerDAO.java:27"
+      ],
+      "say": "The service calls CustomerDAO, which runs one prepared query. Prepared statements keep it safe from SQL injection."
+    },
+    {
+      "kind": "flow",
+      "kicker": "The login story · 4 of 6",
+      "title": "Down to the database",
+      "nodes": [
+        "Browser|user",
+        "LoginServlet|controller",
+        "AccountService|service",
+        "CustomerDAO|dao",
+        "ConnectionDB|util",
+        "PostgreSQL|supabase"
+      ],
+      "active": 4,
+      "point": "A new JDBC connection each time. No pool, so close what you open",
+      "refs": [
+        "src/java/com/ctms/util/ConnectionDB.java:9"
+      ],
+      "say": "ConnectionDB opens a JDBC connection to PostgreSQL. There is no pool, so always close what you open."
+    },
+    {
+      "kind": "flow",
+      "kicker": "The login story · 5 of 6",
+      "title": "The answer comes back",
+      "nodes": [
+        "Browser|user",
+        "LoginServlet|controller",
+        "AccountService|service",
+        "CustomerDAO|dao",
+        "ConnectionDB|util",
+        "PostgreSQL|supabase"
+      ],
+      "active": 1,
+      "point": "Password checked, role returned, user saved in the session",
+      "refs": [
+        "src/java/com/ctms/service/AccountService.java:39",
+        "src/java/com/ctms/controller/LoginServlet.java:37"
+      ],
+      "say": "The row becomes a Customer, AccountService checks the password and returns a role, and the servlet saves the user in the session."
+    },
+    {
+      "kind": "flow",
+      "kicker": "The login story · 6 of 6",
+      "title": "The filter guards the door",
+      "nodes": [
+        "Browser|user",
+        "AuthFilter|filter",
+        "Session|role check",
+        "Dashboard|jsp"
+      ],
+      "active": 1,
+      "point": "Every employee page checks session and role first",
+      "refs": [
+        "src/java/com/ctms/filter/AuthFilter.java:42"
+      ],
+      "say": "AuthFilter now checks that session and role before any employee page loads. Then the browser lands on the right dashboard."
+    },
+    {
+      "kind": "points",
+      "title": "Before you touch anything",
+      "points": [
+        "DB credentials are hardcoded (ConnectionDB.java:8)",
+        "No connection pool",
+        "No automated tests yet: yours sets the standard"
+      ],
+      "say": [
+        "Three things before you touch anything. Database credentials are hardcoded, so ask Daniel for the dev ones.",
+        "There is no connection pool.",
+        "And there are no automated tests yet: your first one sets the standard."
+      ]
+    },
+    {
+      "kind": "points",
+      "title": "Your first week",
+      "points": [
+        "Get the app running, walk the code tour",
+        "Quick win: fix the genere typo in Movie",
+        "Refactor MovieDAO, reviewed by Daniel",
+        "Day 5: check-in with Priya"
+      ],
+      "say": [
+        "Get the app running and walk the code tour.",
+        "Your quick win is fixing the misspelled genere field in the Movie model.",
+        "Then refactor MovieDAO, with Daniel reviewing.",
+        "On day five, check in with Priya."
+      ]
+    },
+    {
+      "kind": "points",
+      "title": "Who to ask",
+      "points": [
+        "Daniel Wong · buddy · code questions",
+        "Priya Menon · manager · expectations",
+        "IT Help · accounts, on day one"
+      ],
+      "say": [
+        "Daniel is your buddy, for day-to-day code questions.",
+        "Priya is your manager, for expectations and thirty-day goals.",
+        "IT handles your accounts, so email them on day one. Not sure why we chose Ant or Supabase? The pack says unknown, so ask Daniel. Welcome aboard, Alex."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Instance overlay: prefills /onboard intake (flat key: value, same keys as intake.yaml).
+# Core never reads this directly; the skill copies these keys into onboarding/<slug>/intake.yaml.
+# Fictional company. Do not put real personal data or secrets here.
+company: Northwind Labs
+company_source: instances/northwind-labs/company/handbook.md
+brand_name: Northwind Labs
+brand_accent: "#f5b800"
+repo_url: https://github.com/arisyasyahirah/NORTHWIND-LABS.git
+project_dir: CTMS_Project
+roles_dir: instances/northwind-labs/roles

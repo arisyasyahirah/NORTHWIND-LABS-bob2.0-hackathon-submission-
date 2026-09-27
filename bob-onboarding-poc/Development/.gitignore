@@ -1,0 +1,7 @@
+.env
+onboarding/*
+!onboarding/alex-tan/
+__pycache__/
+.bob/mcp.json
+.venv/
+scripts/voices/
